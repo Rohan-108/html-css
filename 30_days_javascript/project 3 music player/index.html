@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>music player</title>
+    <link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="main_div">
+        <div class="music_container">
+            <p id="title">Namastute</p>
+            <p id="artist">Sedhe Maut</p>
+            <div class="img_container">
+                <img src="./background.png" alt="">
+            </div>
+            <audio src="./music/SpaceNight.mp3"></audio>
+            <div class="music_controls">
+                <i class="fa-solid fa-backward" id="prev" title="Previous"></i>
+                <i class="fa-solid fa-play main_button" id="play" title="play"></i>
+                <i class="fa-solid fa-forward" id="next" title="Next"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const music=document.querySelector('audio');
+        const play=document.getElementById('play');
+        const img=document.querySelector('img');
+        const title=document.getElementById('title');
+        const artist=document.getElementById('artist');
+        const next=document.getElementById('next');
+        const prev=document.getElementById('prev');
+        const songs=[{
+            name:"SpaceNight",
+            title:"SpaceNight",
+            artist:'bella',
+        },
+        {
+                name: "Uska Hi Banana",
+                title: "Uska Hi Banana",
+                artist: 'arjit singh',
+            },
+            {
+                name: "Kali kali Zulfon Ke",
+                title: "Kali kali zulfon",
+                artist: 'nusrat ali khan',
+            }
+    ];
+        const playMusic=()=>{
+            isPlaying=true;
+            music.play();
+            play.classList.replace('fa-play','fa-pause');
+            img.classList.add("anime");
+        };
+         const pauseMusic = () => {
+             isPlaying=false;
+                music.pause();
+                play.classList.replace('fa-pause', 'fa-play');
+                img.classList.remove("anime");
+            };
+            let isPlaying=false;
+            play.addEventListener('click',()=>{
+               isPlaying?pauseMusic():playMusic();
+            });
+            //function to load next and prev song
+            let songIndex=0;
+                const nextSong=()=>{
+                    songIndex=(songIndex+1)%songs.length;
+                    loadSong( songs[songIndex]);
+                };
+                 const prevSong = () => {
+                        songIndex = (songIndex - 1+songs.length) % songs.length;
+                        loadSong(songs[songIndex]);
+                    };
+            //changing music data
+            const loadSong=(songs)=>{
+                title.textContent=songs.title;
+                artist.textContent=songs.artist;
+                music.src=`./music/${songs.name}.mp3`;
+                playMusic();
+            };
+            next.addEventListener('click',nextSong);
+            prev.addEventListener('click',prevSong);
+    </script>
+</body>
+</html>
