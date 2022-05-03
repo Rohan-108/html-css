@@ -1,0 +1,70 @@
+ body{
+    /*background: #f2f2f2; */
+margin: 0;
+box-sizing: border-box;
+font-family: -apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+Roboto,
+Oxygen,
+Ubuntu,
+Cantarell,
+"Open Sans",
+"Helvetica Neue",
+sans-serif;
+min-height: 100vh;
+}
+.clock{
+    width:15rem;
+    height:15rem;
+    /* border:10px  black; */
+    border-radius: 50%;
+    position: relative;
+    padding: 2rem;
+    margin: 50px auto;
+    background: url(./clock.png);
+    background-size: cover;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.clock-face{
+    position: relative;
+    height: 100%;
+    width:100%;
+    transform: translateY(-3px);
+}
+.hand{
+    /* background: black; */
+    width:50%;
+    height:0.5rem;
+    position: absolute;
+    border-radius: 10px;
+    top:50%;
+    transform-origin: 100%;
+    transform: rotate(90deg);
+    transition: all 0.05s;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+.hour-hand{
+    background:orange 
+}
+.second-hand{
+    background-color: blue;
+}
+.min-hand{
+    background-color: aqua;
+}
+.digital-clock{
+    text-align: center;
+    font-size: 3rem;
+    margin:2em auto;
+    color:rgba(13, 17, 237, 0.5);
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
