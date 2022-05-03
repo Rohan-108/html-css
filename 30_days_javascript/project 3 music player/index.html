@@ -13,8 +13,8 @@
 <body>
     <div class="main_div">
         <div class="music_container">
-            <p id="title">Namastute</p>
-            <p id="artist">Sedhe Maut</p>
+            <p id="title">SpaceNight</p>
+            <p id="artist">bella</p>
             <div class="img_container">
                 <img src="./background.png" alt="">
             </div>
@@ -51,6 +51,8 @@
                 artist: 'nusrat ali khan',
             }
     ];
+
+    let songIndex=0;
         const playMusic=()=>{
             isPlaying=true;
             music.play();
@@ -68,7 +70,6 @@
                isPlaying?pauseMusic():playMusic();
             });
             //function to load next and prev song
-            let songIndex=0;
                 const nextSong=()=>{
                     songIndex=(songIndex+1)%songs.length;
                     loadSong( songs[songIndex]);
