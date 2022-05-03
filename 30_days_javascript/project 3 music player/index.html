@@ -87,6 +87,18 @@
             };
             next.addEventListener('click',nextSong);
             prev.addEventListener('click',prevSong);
+            //function for key pressed
+            window.addEventListener('keydown',(e)=>{
+                 if (e.key === " ") { 
+                    isPlaying ? pauseMusic() : playMusic();
+                }
+                if(e.key==="ArrowRight"){
+                    nextSong();
+                }
+                if(e.key==="ArrowLeft"){
+                    prevSong();
+                }
+            })
     </script>
 </body>
 </html>
