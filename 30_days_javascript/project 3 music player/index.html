@@ -19,6 +19,20 @@
                 <img src="./background.png" alt="">
             </div>
             <audio src="./music/SpaceNight.mp3"></audio>
+            <!-- progress bar -->
+            <div class="progress_bar_container">
+                <div class="progress_time">
+                    <div class="currentTime" id="curTime">
+                        0.00
+                    </div>
+                    <div class="duration" id="totalTime">
+                        3.09
+                    </div>
+                </div>
+                <div class="progress_bar" id="progress_bar">
+                    <div class="progress" id="progressT"></div>
+                </div>
+            </div>
             <div class="music_controls">
                 <i class="fa-solid fa-backward" id="prev" title="Previous"></i>
                 <i class="fa-solid fa-play main_button" id="play" title="play"></i>
@@ -35,6 +49,10 @@
         const artist=document.getElementById('artist');
         const next=document.getElementById('next');
         const prev=document.getElementById('prev');
+        const curTime=document.getElementById('curTime');
+        const totalTime=document.getElementById('totalTime');
+        let progressEl =document.getElementById('progressT');
+        const progress_div=document.getElementById('progress_bar');
         const songs=[{
             name:"SpaceNight",
             title:"SpaceNight",
@@ -98,7 +116,36 @@
                 if(e.key==="ArrowLeft"){
                     prevSong();
                 }
-            })
+            });
+            ///code for progress bar
+            music.addEventListener('timeupdate',(event)=>{
+               const{currentTime,duration}=event.srcElement;//object destructuring
+               let progress_time=(currentTime/duration)*100;
+               progressEl.style.width=`${progress_time}%`;//changing progress width
+                    //showing total time 
+                    let min=Math.floor(duration/60);
+                    let sec=Math.floor(duration%60);
+                    sec=sec<10?'0'+sec:sec;
+                    if(duration){
+
+                        totalTime.textContent=`${min}.${sec}`;
+                    }
+                    //showing currentTime
+                    let minCur=parseInt(currentTime/60);
+                    let secCur=parseInt(currentTime)%60;
+                    secCur = secCur < 10 ? '0' + secCur : secCur;
+                    curTime.textContent=`${minCur}.${secCur}`;
+
+            });
+            //when we click on progress bar it will play song from there
+            progress_div.addEventListener('click',(event)=>{
+                const { duration } =music;
+                let move_progress=(event.offsetX/event.srcElement.clientWidth)*duration;
+                music.currentTime=`${move_progress}`;
+                
+            });
+            //when music end go to next song
+            music.addEventListener('ended',nextSong);
     </script>
 </body>
 </html>

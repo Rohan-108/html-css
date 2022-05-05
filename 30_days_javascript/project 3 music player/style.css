@@ -103,3 +103,31 @@ html{
         transform: rotate(360deg);
     }
 }
+.progress_time{
+    font-size: 1.3rem;
+    padding: 0.6rem;
+    display: flex;
+    justify-content: space-between; 
+    margin-bottom: 0.5rem;
+}
+.progress_bar{
+    cursor: pointer;
+    height: 0.8rem; 
+    max-width: 100%;
+    position: relative;
+    background-color:whitesmoke;
+    margin-left :0.3rem;
+    margin-right:0.3rem;
+    transition: width 1s linear;
+    box-shadow: 0 0.5rem 3rem 0.2rem rgba(0, 0, 0, 0.4);
+    border-radius:4rem;
+}
+.progress{
+    position: absolute;
+    height:100%;
+    background-color: #111;
+    top: 0;
+    left:0;
+    width:0%;
+    border-radius: 4rem;
+}
