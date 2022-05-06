@@ -119,6 +119,8 @@ html{
     margin-left :0.3rem;
     margin-right:0.3rem;
     transition: width 1s linear;
+    -webkit-animation: width 1s linear;
+    -moz-transition: width 1s linear;
     box-shadow: 0 0.5rem 3rem 0.2rem rgba(0, 0, 0, 0.4);
     border-radius:4rem;
 }
