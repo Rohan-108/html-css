@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio visualizer</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <section class="music_area">
+        <header>
+            <h2>Music visualizer</h2>
+        </header>
+        <div class="container">
+            <div class="controls">
+            <audio id="audio1"src="./Uska Hi Banana.mp3" controls></audio>
+            <button id="btn">click</button>
+        </div>
+            <canvas id="canvas"></canvas>
+        </div>
+    </section>
+    <script>
+        //references
+        const audio1=document.getElementById('audio1');
+        const canvas=document.getElementById('canvas');
+        const audioCtx=new AudioContext();
+        const button=document.getElementById('btn');
+        const ctx=canvas.getContext('2d');
+        let audioSource;
+        let analyser;
+        button.addEventListener('click',function(){
+            audio1.play();//playing sound on click
+            audioSource=audioCtx.createMediaElementSource(audio1);//giving source 
+            analyser=audioCtx.createAnalyser();//creating analyser to analyse frequency
+            audioSource.connect(analyser);//connecting it to our source
+            analyser.connect(audioCtx.destination);//connecting source to speakers
+            analyser.fftSize=256;
+            const bufferLength=analyser.frequencyBinCount;//fftSize/2
+            const dataArray=new Uint8Array(bufferLength);
+
+
+            const barWidth=(canvas.width)/bufferLength;//barWidth to cover canvas
+            let barHeight;
+            let x=0;
+
+            function animate(){
+                x=0;
+                ctx.clearRect(0,0,canvas.width,canvas.height);//clearing canvas
+                analyser.getByteFrequencyData(dataArray);//gettting data from analyser
+               drawVisualizer(x, barHeight, barWidth, bufferLength, dataArray);//drawing analyser
+                requestAnimationFrame(animate);//creating loop for animation
+            }
+            animate();//calling animate for animation
+        });
+        //function to draw visualizer 
+        function drawVisualizer(x,barHeight,barWidth,bufferLength,dataArray){
+             for (let i = 0; i < bufferLength/2; i++) {
+                barHeight = dataArray[i] / 2;
+                   const red = i * barHeight / 5;
+                 const green = i * 4;
+                 const blue = barHeight;
+                ctx.fillStyle = 'rgb('+red+','+green+','+blue+')';
+                ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+                x += barWidth;
+            }
+            for (let i = bufferLength/2; i >=0; i--) {
+                barHeight = dataArray[i] / 2;
+                 const red = i * barHeight / 5;
+                const green = i * 4;
+                const blue = barHeight;
+                ctx.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')';
+                ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+                x += barWidth;
+            }
+        }
+
+    </script>
+</body>
+</html>
