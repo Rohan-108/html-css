@@ -1,0 +1,48 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Times New Roman', Times, serif;
+    height: 100vh;
+     background-color: #111;
+    overflow: hidden;
+    color: whitesmoke;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 3rem;
+}
+h1,h2{
+    margin: 0.4rem;
+    font-weight: 400;
+}
+h1{
+    font-size: 3.5rem;
+}
+h2{
+    font-size: 2rem;
+    color: #aaa;
+}
+.txt-type>.txt{
+    border-right: 0.2rem solid #777;
+    font-size: 3.5rem;
+    display: inline;
+}
+@media(min-width:1200px){
+    h1{
+        font-size: 5rem;
+    }
+}
+@media(max-width:800px) {
+    h1 {
+        font-size: 3rem;
+    }
+    .container{
+        padding: 0 1rem;
+    }
+}
